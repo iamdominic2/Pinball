@@ -1,0 +1,281 @@
+//----- Variables -----------------------------------------------------------------------------------------------------
+
+dir = -91
+dir start = -210
+dot product = 8
+REFLECT = 0
+touching = 0
+xv = 0
+yv = -0.33
+zone = 0
+
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(Erase)
+{
+    Control.DeleteThisClone();
+}
+
+WhenBroadcastReceived(START)
+{
+    s = 0;
+}
+
+WhenBroadcastReceived(START)
+{
+    Looks.SwitchCostumeTo(Ball);
+    Looks.Hide();
+    Force = 0;
+}
+
+
+//----- Start as clone ------------------------------------------------------------------------------------------------
+
+Control.WhenIStartAsClone()
+{
+    Looks.SetSizeTo(60);
+    Looks.Show();
+    Motion.GoTo( Tank);
+    Looks.SetEffectTo(GHOST, 100);
+    Motion.PointInDirection(0);
+    xv = Operator.Random(-0.5 , 0.5);
+    Wait Until (Force > 1.6);
+    Sound.SetVolumeTo(77);
+    Sound.Play(Drum Boing);
+    Repeat (13)
+    {
+        yv = (Force * 2.8);
+        Motion.ChangeYBy((Force * 1.7));
+    }
+    Motion.Move(16);
+    REFLECT = 0;
+    Forever
+    {
+        Motion.ChangeYBy((-1 * REFLECT));
+        Looks.SetEffectTo(GHOST, 100);
+        Costume.GoToFrontBack(front);
+        Call Tick;
+        If Sensing.TouchingObject(Level)
+        {
+            Call Check collision(Motion.XPosition())(Motion.YPosition());
+        }
+        Call me;
+        If (Sensing.TouchingObject(area) And (Not (Sensing.TouchingObject(barrier))))
+        {
+            zone = 1;
+        }
+        Looks.SetSizeTo(70);
+        If Sensing.TouchingObject(Ball)
+        {
+            Control.Wait(0);
+        }
+        Looks.SetSizeTo(60);
+        If Sensing.TouchingObject(bounce1)
+        {
+            yv = (yv / 2);
+            yv += (Force / 0.6);
+            Sound.SetVolumeTo(((Force - 1.6) * 55));
+            Sound.Play(Drum Boing);
+        }
+        If Sensing.TouchingObject(left)
+        {
+            Call Check collision(Motion.XPosition())(Motion.YPosition());
+            yv = (yv / 2);
+            yv += (tl * 14);
+            xv += ((Not ((Sensing.Of(direction, left) == 40))) * 3);
+            Repeat (tl)
+            {
+                s += 30;
+                Sound.SetVolumeTo(100);
+                Sound.Play(pop);
+            }
+        }
+        If Sensing.TouchingObject(right)
+        {
+            Call Check collision(Motion.XPosition())(Motion.YPosition());
+            yv = (yv / 2);
+            yv += (tr * 14);
+            xv += ((Not ((Sensing.Of(direction, right) == 140))) * -3);
+            Repeat (tr)
+            {
+                s += 31;
+                Sound.SetVolumeTo(100);
+                Sound.Play(pop);
+            }
+        }
+        Change = Operator.Round((sqrt(abs((xv * yv))) * 11));
+        If ((Motion.YPosition() < -11) And Sensing.TouchingObject(area))
+        {
+            yv = (yv / 1.02);
+        }
+    }
+}
+
+Control.WhenIStartAsClone()
+{
+    Forever
+    {
+        xxx = Motion.XPosition();
+        yyy = Motion.YPosition();
+    }
+}
+
+
+//----- Custom blocks -------------------------------------------------------------------------------------------------
+
+Define Bounce(string x)(string y) (warp=false)
+{
+    dot product = ((xv * x) + (yv * y));
+    s += (((dot product * dot product) / 4) * Sensing.TouchingObject(area));
+    xv += (-1.8 * (x * dot product));
+    If (yv == -1.6)
+    {
+        yv = 0;
+    }
+    Else
+    {
+        yv += ((-1.75 * (y * dot product)) * ((abs((yv > 3)) + 2) / 3));
+    }
+}
+
+Define Check collision(string x)(string y) (warp=true)
+{
+    Motion.PointInDirection(90);
+    dot product = 0;
+    Repeat (23)
+    {
+        Repeat (8)
+        {
+            Motion.GoToXY(x, y);
+            Motion.TurnRight(45);
+            Motion.Move(dot product);
+            If (Not (((Sensing.TouchingObject(Level) Or Sensing.TouchingObject(Ball)) Or (Sensing.TouchingObject(left) Or Sensing.TouchingObject(right)))))
+            {
+                Stop(this script);
+            }
+        }
+        dot product += 1;
+    }
+    Motion.GoTo(bounce2);
+}
+
+Define Find normal (warp=true)
+{
+    Looks.Show();
+    Looks.SwitchCostumeTo(Normal);
+    dir = 0;
+    Motion.PointInDirection(dir);
+    If (Sensing.TouchingObject(Level) Or Sensing.TouchingObject(Ball))
+    {
+        Repeat Until (Not ((Sensing.TouchingObject(Level) Or Sensing.TouchingObject(Ball))))
+        {
+            Call Rotate(2);
+        }
+        dir start = (dir - 2);
+    }
+    Else
+    {
+        Repeat Until (Sensing.TouchingObject(Level) Or Sensing.TouchingObject(Ball))
+        {
+            Call Rotate(-2);
+        }
+        dir start = dir;
+        dir = 0;
+        Motion.PointInDirection(dir);
+    }
+    Repeat Until (Sensing.TouchingObject(Level) Or Sensing.TouchingObject(Ball))
+    {
+        Call Rotate(2);
+    }
+    dir = (((dir + dir start) / 2) + Operator.Random(-3 , 3));
+    Call Bounce(sin(dir))(cos(dir));
+    Looks.SwitchCostumeTo(Ball);
+    Repeat (20)
+    {
+        Motion.ChangeXBy((sin(dir) / 7));
+        Motion.ChangeYBy((cos(dir) / 7));
+        If Sensing.TouchingObject(Level)
+        {
+            Stop(this script);
+        }
+    }
+    Looks.SwitchCostumeTo(Ball);
+}
+
+Define me (warp=true)
+{
+    If (Sensing.TouchingObject(barrier) And (zone == 1))
+    {
+        Sound.Play(pop);
+        Repeat Until (Not (Sensing.TouchingObject(barrier)))
+        {
+            Motion.ChangeXBy(-1);
+        }
+        xv = (-1 * xv);
+    }
+}
+
+Define Rotate(string number) (warp=true)
+{
+    dir += number;
+    Motion.PointInDirection(dir);
+    If (abs(dir) > 1080)
+    {
+        Call me;
+    }
+}
+
+Define Tick (warp=true)
+{
+    xv = (xv / 1.02);
+    yv = (yv / 1.01);
+    Motion.ChangeXBy(xv);
+    Motion.ChangeYBy(yv);
+    If Sensing.TouchingColour(#ff0000)
+    {
+        Looks.SetEffectTo(GHOST, 100);
+        Sound.SetVolumeTo(100);
+        Sound.Play(Police Siren);
+        Event.Broadcast("NEW BALL");
+        Control.DeleteThisClone();
+    }
+    If (Sensing.TouchingObject(Level) Or Sensing.TouchingObject(Ball))
+    {
+        touching = 1;
+        Repeat Until (Not ((Sensing.TouchingObject(Level) Or Sensing.TouchingObject(Ball))))
+        {
+            Motion.ChangeXBy((-0.06 * xv));
+            Motion.ChangeYBy((-0.06 * yv));
+            If Sensing.TouchingColour(#170303)
+            {
+                Motion.GoTo(bounce2);
+                Stop(this script);
+            }
+        }
+        Call Find normal;
+        Looks.SwitchCostumeTo(Ball);
+        Sound.SetVolumeTo(((abs(dot product) * 22) - 45));
+        Sound.Play(pop);
+    }
+    yv += -0.26;
+}
+
+
+//----- Orphaned blocks -----------------------------------------------------------------------------------------------
+
+(Force * 111);
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+Ball.svg
+Normal.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+Drum Boing.wav
+Police Siren.wav
+pop.wav

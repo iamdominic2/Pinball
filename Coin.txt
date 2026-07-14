@@ -1,0 +1,101 @@
+//----- Variables -----------------------------------------------------------------------------------------------------
+
+dir = -91
+dir start = -210
+dot product = 8
+REFLECT = 0
+touching = 0
+xv = 0
+yv = -0.33
+zone = 0
+
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(Erase)
+{
+    Control.DeleteThisClone();
+}
+
+WhenBroadcastReceived(START)
+{
+    Looks.SwitchCostumeTo(Ball);
+    Looks.Hide();
+    Repeat (3)
+    {
+        Control.CreateCloneOf(_myself_);
+    }
+}
+
+
+//----- Start as clone ------------------------------------------------------------------------------------------------
+
+Control.WhenIStartAsClone()
+{
+    Looks.Show();
+    Motion.GoToXY(Operator.Random(-110 , 80), Operator.Random(-100 , 111));
+    Motion.PointInDirection(90);
+    Looks.SetSizeTo(200);
+    Looks.SetEffectTo(GHOST, 100);
+    Repeat Until (Not ((Sensing.TouchingObject(Level) Or (Sensing.TouchingObject(Coin) Or Sensing.TouchingObject(Coin2)))))
+    {
+        Motion.GoToXY(Operator.Random(-110 , 80), Operator.Random(-100 , 111));
+    }
+    Looks.SwitchCostumeTo(Ball2);
+    Looks.ClearGraphicEffects();
+    Forever
+    {
+        Looks.SetSizeTo((((sin((ttt * 400)) * 10) + 90) + (180 * (largedir > 0))));
+        If Sensing.TouchingObject(Ball2)
+        {
+            Sound.Play(Coin);
+            Score += (10 * ((x2 dur > 0) + 1));
+            Looks.SwitchCostumeTo(Ball);
+            Looks.Show();
+            Motion.GoToXY(Operator.Random(-110 , 80), Operator.Random(-100 , 111));
+            Looks.SetSizeTo(200);
+            Looks.SetEffectTo(GHOST, 100);
+            Control.Wait(1);
+            Repeat Until ((Not ((Sensing.TouchingObject(Level) Or (Sensing.TouchingObject(Coin) Or Sensing.TouchingObject(Coin2))))) And (Sensing.DistanceTo(Ball2) > 110))
+            {
+                Motion.GoToXY(Operator.Random(-110 , 80), Operator.Random(-100 , 111));
+            }
+            Looks.SwitchCostumeTo(Ball2);
+            Looks.ClearGraphicEffects();
+            Looks.SetSizeTo(100);
+        }
+        If (x2 dur > 0)
+        {
+            Looks.SwitchCostumeTo(Ball3);
+        }
+        Else
+        {
+            Looks.SwitchCostumeTo(Ball2);
+        }
+    }
+}
+
+
+//----- Orphaned blocks -----------------------------------------------------------------------------------------------
+
+x2 dur = 0;
+
+x2 dur = 0;
+
+( + );
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+Ball.svg
+Ball2.svg
+Ball3.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+Coin.wav
+Drum Boing.wav
+Police Siren.wav
+pop.wav

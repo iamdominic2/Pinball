@@ -1,0 +1,44 @@
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(Erase)
+{
+    Control.DeleteThisClone();
+}
+
+WhenBroadcastReceived(NEW BALL)
+{
+    If (Life > 1)
+    {
+        Control.Wait(0);
+        Life += -1;
+        Control.CreateCloneOf(Ball);
+    }
+    Else
+    {
+        Sound.Play(Lose);
+        Event.Broadcast("lose");
+    }
+}
+
+WhenBroadcastReceived(START)
+{
+    Event.Broadcast("NEW BALL");
+}
+
+WhenBroadcastReceived(START)
+{
+    Sensing.SetDragMode(draggable);
+    Looks.Hide();
+    Motion.GoToXY(204, -139);
+    Motion.PointInDirection(0);
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+Lose.wav

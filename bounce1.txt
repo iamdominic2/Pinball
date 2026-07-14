@@ -1,0 +1,62 @@
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(START)
+{
+    Change = 0;
+    Repeat (10)
+    {
+        Force = 1;
+        Looks.SwitchCostumeTo(costume7);
+    }
+    Forever
+    {
+        Looks.SwitchCostumeTo(floor((Operator.Round((Force / 1.1)) - 0.2)));
+        If ((Costume.GetNumberName(number) == 7) And (Force > 6))
+        {
+            Looks.SwitchCostumeTo(costume1);
+        }
+        If ((((Sensing.KeyPressed(space) Or Sensing.KeyPressed(up arrow)) Or Sensing.KeyPressed(w)) Or ((Sensing.MouseX() > 160) And Sensing.MouseDown())) And (Force < 8))
+        {
+            Looks.NextCostume();
+            Force += 0.55;
+        }
+        Else
+        {
+            If (Force > 6)
+            {
+                Repeat Until (Force < 1)
+                {
+                    Force += (-0.25 * (Force > 0));
+                    Looks.SwitchCostumeTo((Force / 1.5));
+                }
+            }
+        }
+        If (Not ((((Sensing.KeyPressed(space) Or Sensing.KeyPressed(up arrow)) Or Sensing.KeyPressed(w)) Or ((Sensing.MouseX() > 160) And Sensing.MouseDown()))))
+        {
+            Force += (-0.1 * (Force > 1.1));
+        }
+    }
+}
+
+WhenBroadcastReceived(START)
+{
+    Forever
+    {
+        Sound.SetEffectTo(PITCH, (222 / Force));
+        If (Force > 1.5)
+        {
+            Sound.Play(Bark);
+        }
+    }
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.svg
+costume2.svg
+costume3.svg
+costume4.svg
+costume5.svg
+costume6.svg
+costume7.svg

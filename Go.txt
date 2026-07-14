@@ -1,0 +1,43 @@
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(lose)
+{
+    Life = 0;
+    Event.BroadcastAndWait("Erase");
+    Looks.Show();
+    Forever
+    {
+        Motion.SetY((Motion.YPosition() / 1.21));
+        If ((abs(Sensing.MouseX()) < 133) And (abs((Sensing.MouseY() + 111)) < 29))
+        {
+            Looks.SwitchCostumeTo(costume2);
+            If Sensing.MouseDown()
+            {
+                Life = 4;
+                Event.Broadcast("START");
+                Stop(this script);
+            }
+        }
+        Else
+        {
+            Looks.SwitchCostumeTo(costume1);
+        }
+    }
+}
+
+WhenBroadcastReceived(START)
+{
+    Looks.Hide();
+    Motion.GoToXY(0, 180);
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.svg
+costume2.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+pop.wav

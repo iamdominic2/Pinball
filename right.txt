@@ -1,0 +1,36 @@
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(START)
+{
+    Motion.GoToXY(25, -138);
+    Looks.SetSizeTo(55);
+    Forever
+    {
+        tr = 0;
+        If ((Sensing.KeyPressed(d) Or Sensing.KeyPressed(right arrow)) Or ((Sensing.MouseDown() And (Sensing.MouseX() > 25)) And (Sensing.MouseX() < 160)))
+        {
+            tr = Operator.Random(1 , 1.6);
+            Motion.TurnRight(12);
+        }
+        Motion.TurnLeft(4);
+        If (Motion.Direction() > 140)
+        {
+            Motion.PointInDirection(140);
+            tr = 0;
+        }
+        If (Motion.Direction() < 90)
+        {
+            Motion.PointInDirection(90);
+        }
+    }
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+pop.wav

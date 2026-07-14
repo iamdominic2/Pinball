@@ -1,0 +1,207 @@
+//----- Variables -----------------------------------------------------------------------------------------------------
+
+attacker = 0
+counter t = 0
+para'd = 0
+target = 0
+
+
+
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Looks.SwitchCostumeTo(1);
+    hi = 100;
+    Looks.Hide();
+    Looks.SetSizeTo(100);
+    Forever
+    {
+        Event.Broadcast("Delete Text");
+        Looks.SetEffectTo(COLOR, 130);
+        Call Print(Operator.Join(Score, "pt")) x(-226) y(160);
+        Looks.SetEffectTo(COLOR, 0);
+        Call Print(Operator.Join(hi, "hi")) x(-226) y(136);
+        Looks.SetEffectTo(COLOR, 90);
+        Call Print(Operator.Join("%", Life)) x(-217) y(112);
+    }
+}
+
+WhenGreenFlagClicked()
+{
+    Control.Wait(1);
+    Forever
+    {
+        If (Score > hi)
+        {
+            hi = Score;
+        }
+    }
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(Delete Text)
+{
+    Control.DeleteThisClone();
+}
+
+WhenBroadcastReceived(showstatus)
+{
+}
+
+
+//----- Start as clone ------------------------------------------------------------------------------------------------
+
+Control.WhenIStartAsClone()
+{
+    If (Costume.GetNumberName(number) == 65)
+    {
+        Control.DeleteThisClone();
+    }
+    Looks.Show();
+    If ((Costume.GetNumberName(number) > 79) Or (Costume.GetNumberName(number) < 13))
+    {
+        Looks.SetEffectTo(BRIGHTNESS, 0);
+    }
+    Forever
+    {
+        Costume.GoToFrontBack(front);
+    }
+}
+
+
+//----- Custom blocks -------------------------------------------------------------------------------------------------
+
+Define Print(string text) x(string x) y(string y) (warp=true)
+{
+    If (Not (Operator.Contains(text, "Infinity")))
+    {
+        Motion.GoToXY(x, y);
+        ctext = 0;
+        Repeat (Variable.Length(text))
+        {
+            ctext += 1;
+            Looks.SwitchCostumeTo(Operator.LetterOf(text, ctext));
+            If (Not (((Costume.GetNumberName(number) == 65) Or (Costume.GetNumberName(number) == 75))))
+            {
+                Control.CreateCloneOf(_myself_);
+            }
+            Motion.ChangeXBy((Looks.Size() / 9));
+        }
+    }
+    Else
+    {
+    }
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+ .svg
+!.svg
+$.svg
+%.svg
+'.svg
+(.svg
+).svg
+*.svg
++.svg
+,.svg
+-.svg
+..svg
+/.svg
+0.svg
+1.svg
+2.svg
+3.svg
+4.svg
+5.svg
+6.svg
+7.svg
+8.svg
+9.svg
+10.svg
+:.svg
+<.svg
+>.svg
+?.svg
+@.png
+A.svg
+a.svg
+B.svg
+b.svg
+C.svg
+c.svg
+D.svg
+d.svg
+E.svg
+e.svg
+F.svg
+f.svg
+G.svg
+g.svg
+H.svg
+h.svg
+I.svg
+i.svg
+J.svg
+j.svg
+K.svg
+k.svg
+L.svg
+l.svg
+M.svg
+m.svg
+N.svg
+n.svg
+O.svg
+o.svg
+P.svg
+p.svg
+Q.svg
+q.svg
+R.svg
+r.svg
+S.svg
+s.svg
+T.svg
+t.svg
+U.svg
+u.svg
+V.svg
+v.svg
+W.svg
+w.svg
+X.svg
+x.svg
+Y.svg
+y.svg
+Z.svg
+z.svg
+\.png
+`.png
+~.svg
+二.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+charge.wav
+Chomp.wav
+Confusion.wav
+Equip.wav
+Explosion.wav
+Fire.wav
+Lightning.wav
+pop.wav
+Punch1.wav
+PunchKill2.wav
+Read.wav
+Slow.wav
+Snoring.wav
+Snort.wav
+Swish Effect2.wav
+Teleport2.wav
+Unequip.wav

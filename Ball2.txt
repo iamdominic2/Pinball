@@ -1,0 +1,111 @@
+//----- Variables -----------------------------------------------------------------------------------------------------
+
+dir = -91
+dir start = -210
+dot product = 8
+REFLECT = 0
+touching = 0
+xv = 0
+yv = -0.33
+zone = 0
+
+
+
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(Erase)
+{
+    Control.DeleteThisClone();
+}
+
+WhenBroadcastReceived(START)
+{
+    Looks.SwitchCostumeTo(Ball);
+    List.DeleteAll(yy);
+    List.DeleteAll(xx);
+    List.Add(xx, 204);
+    List.Add(xx, 204);
+    List.Add(xx, 204);
+    List.Add(xx, 204);
+    List.Add(xx, 204);
+    List.Add(yy, -117);
+    List.Add(yy, -117);
+    List.Add(yy, -117);
+    List.Add(yy, -117);
+    List.Add(yy, -117);
+    List.Add(xx, 204);
+    List.Add(yy, -117);
+    Looks.Show();
+    Forever
+    {
+        Pen.Clear();
+        Pen.SetPenSizeTo(2);
+        Pen.SetPenColorToColor(#c40dfc);
+        Motion.GoToXY(xx[(List.Length(xx) - 5)], yy[(List.Length(yy) - 5)]);
+        Pen.Down();
+        Pen.SetPenSizeTo(2);
+        Motion.GoToXY(xx[(List.Length(xx) - 4)], yy[(List.Length(yy) - 4)]);
+        Pen.ChangePenBy(color, -5);
+        Pen.SetPenSizeTo(4);
+        Pen.Down();
+        Motion.GoToXY(xx[(List.Length(xx) - 3)], yy[(List.Length(yy) - 3)]);
+        Pen.ChangePenBy(color, -5);
+        Pen.SetPenSizeTo(6);
+        Pen.Down();
+        Motion.GoToXY(xx[(List.Length(xx) - 2)], yy[(List.Length(yy) - 2)]);
+        Pen.ChangePenBy(color, -5);
+        Pen.SetPenSizeTo(8);
+        Pen.Down();
+        Motion.GoToXY(xx[(List.Length(xx) - 1)], yy[(List.Length(yy) - 1)]);
+        Pen.SetPenSizeTo(10);
+        Pen.Down();
+        Motion.GoToXY(xx[(List.Length(xx) - 0)], yy[(List.Length(yy) - 0)]);
+        Pen.Clear();
+        Looks.SetSizeTo(60);
+        Motion.GoTo(Ball);
+        Motion.GoToXY(Operator.Round(xxx), Operator.Round(yyy));
+        Call Upper;
+        Looks.SetSizeTo(70);
+        List.Add(xx, Motion.XPosition());
+        List.Add(yy, Motion.YPosition());
+    }
+}
+
+
+//----- Custom blocks -------------------------------------------------------------------------------------------------
+
+Define Upper (warp=true)
+{
+    Repeat (200)
+    {
+        If ((Sensing.TouchingObject(bounce1) Or Sensing.TouchingObject(bounce2)) Or (Sensing.TouchingObject(left) Or Sensing.TouchingObject(right)))
+        {
+            Motion.ChangeYBy(2);
+        }
+    }
+}
+
+
+//----- Orphaned blocks -----------------------------------------------------------------------------------------------
+
+Pen.ChangePenBy(color, -5);
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+Ball.svg
+Ball2.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+Drum Boing.wav
+Police Siren.wav
+pop.wav
