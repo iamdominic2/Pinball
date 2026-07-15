@@ -28,6 +28,7 @@ WhenBroadcastReceived(Erase)
 WhenBroadcastReceived(START)
 {
     Looks.SwitchCostumeTo(Ball);
+    Motion.GoToXY(204, -117);
     List.DeleteAll(yy);
     List.DeleteAll(xx);
     List.Add(xx, 204);
@@ -91,11 +92,6 @@ Define Upper (warp=true)
         }
     }
 }
-
-
-//----- Orphaned blocks -----------------------------------------------------------------------------------------------
-
-Pen.ChangePenBy(color, -5);
 
 
 //----- Costumes ------------------------------------------------------------------------------------------------------

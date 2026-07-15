@@ -57,7 +57,7 @@ Control.WhenIStartAsClone()
         Looks.SetEffectTo(GHOST, 100);
         Costume.GoToFrontBack(front);
         Call Tick;
-        If Sensing.TouchingObject(Level)
+        If (Sensing.TouchingObject(Level) Or (Sensing.TouchingObject(barrier) And (zone == 1)))
         {
             Call Check collision(Motion.XPosition())(Motion.YPosition());
         }
@@ -65,6 +65,10 @@ Control.WhenIStartAsClone()
         If (Sensing.TouchingObject(area) And (Not (Sensing.TouchingObject(barrier))))
         {
             zone = 1;
+        }
+        Else
+        {
+            zone = 0;
         }
         Looks.SetSizeTo(70);
         If Sensing.TouchingObject(Ball)
@@ -151,7 +155,7 @@ Define Check collision(string x)(string y) (warp=true)
             Motion.GoToXY(x, y);
             Motion.TurnRight(45);
             Motion.Move(dot product);
-            If (Not (((Sensing.TouchingObject(Level) Or Sensing.TouchingObject(Ball)) Or (Sensing.TouchingObject(left) Or Sensing.TouchingObject(right)))))
+            If (Not ((((Sensing.TouchingObject(Level) Or Sensing.TouchingObject(Ball)) Or (Sensing.TouchingObject(left) Or Sensing.TouchingObject(right))) Or (Sensing.TouchingObject(barrier) And (zone == 1)))))
             {
                 Stop(this script);
             }

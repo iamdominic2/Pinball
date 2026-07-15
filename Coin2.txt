@@ -44,11 +44,11 @@ WhenBroadcastReceived(START)
 Control.WhenIStartAsClone()
 {
     Looks.Show();
-    Motion.GoToXY(Operator.Random(-110 , 80), Operator.Random(0 , 140));
+    Motion.GoTo(_random_);
     Looks.SetSizeTo(200);
     Motion.PointInDirection(90);
     Looks.SetEffectTo(GHOST, 100);
-    Repeat Until (Not (((Not ((Sensing.TouchingObject(Level) Or (Sensing.TouchingObject(Coin) Or Sensing.TouchingObject(Coin2))))) And (Sensing.DistanceTo(Ball2) > 50))))
+    Repeat Until (Not (((Not ((Sensing.TouchingObject(forbid) Or (Sensing.TouchingObject(Coin) Or Sensing.TouchingObject(Coin2))))) And (Sensing.DistanceTo(Ball2) > 50))))
     {
         Motion.GoToXY(Operator.Random(-110 , 80), Operator.Random(0 , 140));
     }
@@ -98,12 +98,14 @@ Control.WhenIStartAsClone()
             Looks.SwitchCostumeTo(Ball);
             Looks.Show();
             Motion.GoToXY(Operator.Random(-110 , 80), Operator.Random(0 , 140));
+            Motion.GoTo(_random_);
             Looks.SetSizeTo(200);
             Looks.SetEffectTo(GHOST, 100);
             Control.Wait(8);
-            Repeat Until (Not (((Not ((Sensing.TouchingObject(Level) Or (Sensing.TouchingObject(Coin) Or Sensing.TouchingObject(Coin2))))) And (Sensing.DistanceTo(Ball2) > 110))))
+            Repeat Until (Not (((Not ((Sensing.TouchingObject(forbid) Or (Sensing.TouchingObject(Coin) Or Sensing.TouchingObject(Coin2))))) And (Sensing.DistanceTo(Ball2) > 110))))
             {
                 Motion.GoToXY(Operator.Random(-110 , 80), Operator.Random(0 , 140));
+                Motion.GoTo(_random_);
             }
             Looks.SwitchCostumeTo(Operator.Random(2 , 6));
             Looks.ClearGraphicEffects();

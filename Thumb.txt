@@ -5,6 +5,7 @@ WhenGreenFlagClicked()
     Looks.Hide();
     Forever
     {
+        Costume.GoToFrontBack(front);
         Sensing.ResetTimer();
     }
 }

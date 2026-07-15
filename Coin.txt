@@ -38,9 +38,9 @@ Control.WhenIStartAsClone()
     Motion.PointInDirection(90);
     Looks.SetSizeTo(200);
     Looks.SetEffectTo(GHOST, 100);
-    Repeat Until (Not ((Sensing.TouchingObject(Level) Or (Sensing.TouchingObject(Coin) Or Sensing.TouchingObject(Coin2)))))
+    Repeat Until (Not ((Sensing.TouchingObject(forbid) Or (Sensing.TouchingObject(Coin) Or Sensing.TouchingObject(Coin2)))))
     {
-        Motion.GoToXY(Operator.Random(-110 , 80), Operator.Random(-100 , 111));
+        Motion.GoTo(_random_);
     }
     Looks.SwitchCostumeTo(Ball2);
     Looks.ClearGraphicEffects();
@@ -54,12 +54,13 @@ Control.WhenIStartAsClone()
             Looks.SwitchCostumeTo(Ball);
             Looks.Show();
             Motion.GoToXY(Operator.Random(-110 , 80), Operator.Random(-100 , 111));
+            Motion.GoTo(_random_);
             Looks.SetSizeTo(200);
             Looks.SetEffectTo(GHOST, 100);
             Control.Wait(1);
-            Repeat Until ((Not ((Sensing.TouchingObject(Level) Or (Sensing.TouchingObject(Coin) Or Sensing.TouchingObject(Coin2))))) And (Sensing.DistanceTo(Ball2) > 110))
+            Repeat Until ((Not ((Sensing.TouchingObject(forbid) Or (Sensing.TouchingObject(Coin) Or Sensing.TouchingObject(Coin2))))) And (Sensing.DistanceTo(Ball2) > 110))
             {
-                Motion.GoToXY(Operator.Random(-110 , 80), Operator.Random(-100 , 111));
+                Motion.GoTo(_random_);
             }
             Looks.SwitchCostumeTo(Ball2);
             Looks.ClearGraphicEffects();
