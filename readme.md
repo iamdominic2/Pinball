@@ -2,8 +2,10 @@
 
 **Link: https://iamdominic2.github.io/Pinball/**
 
-Left/A move left paddle
+Left arrow moves the left paddle
 
-Right/D move left paddle
+Right arrow moves the right paddle
 
-Space/Up/W to shoot boingy thingy
+Space/Up to shoot spring.
+
+Use A/S/D to push the pinball table itself (as much as you want)!
