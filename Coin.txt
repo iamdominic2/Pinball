@@ -6,7 +6,9 @@ dot product = 8
 REFLECT = 0
 touching = 0
 xv = 0
+xxxx = 0
 yv = -0.33
+yyyy = 0
 zone = 0
 
 
@@ -44,8 +46,11 @@ Control.WhenIStartAsClone()
     }
     Looks.SwitchCostumeTo(Ball2);
     Looks.ClearGraphicEffects();
+    xxxx = Motion.XPosition();
+    yyyy = Motion.YPosition();
     Forever
     {
+        Motion.GoToXY(xxxx, yyyy);
         Looks.SetSizeTo((((sin((ttt * 400)) * 10) + 90) + (180 * (largedir > 0))));
         If Sensing.TouchingObject(Ball2)
         {
@@ -65,6 +70,8 @@ Control.WhenIStartAsClone()
             Looks.SwitchCostumeTo(Ball2);
             Looks.ClearGraphicEffects();
             Looks.SetSizeTo(100);
+            xxxx = Motion.XPosition();
+            yyyy = Motion.YPosition();
         }
         If (x2 dur > 0)
         {
@@ -74,17 +81,10 @@ Control.WhenIStartAsClone()
         {
             Looks.SwitchCostumeTo(Ball2);
         }
+        Motion.ChangeXBy(Sensing.Of(x position, LevelDisp));
+        Motion.ChangeYBy(Sensing.Of(y position, LevelDisp));
     }
 }
-
-
-//----- Orphaned blocks -----------------------------------------------------------------------------------------------
-
-x2 dur = 0;
-
-x2 dur = 0;
-
-( + );
 
 
 //----- Costumes ------------------------------------------------------------------------------------------------------

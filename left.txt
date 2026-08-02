@@ -2,12 +2,12 @@
 
 WhenBroadcastReceived(START)
 {
-    Motion.GoToXY(-56, -138);
     Looks.SetSizeTo(55);
     Forever
     {
+        Motion.GoToXY((Sensing.Of(x position, LevelDisp) - 56), (Sensing.Of(y position, LevelDisp) - 138));
         tl = 0;
-        If ((Sensing.KeyPressed(a) Or Sensing.KeyPressed(left arrow)) Or (Sensing.MouseDown() And (Sensing.MouseX() < -25)))
+        If (( Or Sensing.KeyPressed(left arrow)) Or (Sensing.MouseDown() And (Sensing.MouseX() < -25)))
         {
             Motion.TurnLeft(12);
             tl = Operator.Random(1 , 1.6);
@@ -29,8 +29,3 @@ WhenBroadcastReceived(START)
 //----- Costumes ------------------------------------------------------------------------------------------------------
 
 costume1.svg
-
-
-//----- Sounds --------------------------------------------------------------------------------------------------------
-
-pop.wav

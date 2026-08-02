@@ -2,7 +2,8 @@
 
 WhenGreenFlagClicked()
 {
-    Looks.Hide();
+    Looks.Show();
+    Looks.SetEffectTo(GHOST, 100);
     Forever
     {
         Costume.GoToFrontBack(front);
@@ -13,18 +14,12 @@ WhenGreenFlagClicked()
 
 //----- When greater than events --------------------------------------------------------------------------------------
 
-WhenGreaterThan(TIMER, 0.01)
+WhenGreaterThan(TIMER, 0)
 {
     Motion.GoToXY(0, 0);
-    Looks.Show();
 }
 
 
 //----- Costumes ------------------------------------------------------------------------------------------------------
 
 costume1.svg
-
-
-//----- Sounds --------------------------------------------------------------------------------------------------------
-
-pop.wav

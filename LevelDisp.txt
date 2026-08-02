@@ -1,20 +1,18 @@
 //----- Broadcast received events -------------------------------------------------------------------------------------
 
-WhenBroadcastReceived(Boing)
+WhenBroadcastReceived(Erase)
 {
-    Sound.Play(Door Closing);
+    Control.DeleteThisClone();
 }
 
 WhenBroadcastReceived(START)
 {
-    Life = 4;
-    shield dir = 0;
-    x2 dur = 0;
-    Looks.SetEffectTo(GHOST, 100);
     Forever
     {
         Looks.SwitchCostumeTo((shield dir > 0));
         Motion.GoToXY(0, 0);
+        Control.Wait(0);
+        Motion.GoToXY(NudgeX, NudgeY);
     }
 }
 
@@ -23,9 +21,3 @@ WhenBroadcastReceived(START)
 
 False.svg
 True.svg
-
-
-//----- Sounds --------------------------------------------------------------------------------------------------------
-
-Door Closing.wav
-Drum Boing.wav

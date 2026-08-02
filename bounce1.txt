@@ -10,12 +10,13 @@ WhenBroadcastReceived(START)
     }
     Forever
     {
+        Motion.GoToXY((Sensing.Of(x position, LevelDisp) + 201), (Sensing.Of(y position, LevelDisp) - 154));
         Looks.SwitchCostumeTo(floor((Operator.Round((Force / 1.1)) - 0.2)));
         If ((Costume.GetNumberName(number) == 7) And (Force > 6))
         {
             Looks.SwitchCostumeTo(costume1);
         }
-        If ((((Sensing.KeyPressed(space) Or Sensing.KeyPressed(up arrow)) Or Sensing.KeyPressed(w)) Or ((Sensing.MouseX() > 160) And Sensing.MouseDown())) And (Force < 8))
+        If ((((Sensing.KeyPressed(space) Or Sensing.KeyPressed(up arrow)) Or ) Or ((Sensing.MouseX() > 160) And Sensing.MouseDown())) And (Force < 8))
         {
             Looks.NextCostume();
             Force += 0.55;
@@ -31,21 +32,9 @@ WhenBroadcastReceived(START)
                 }
             }
         }
-        If (Not ((((Sensing.KeyPressed(space) Or Sensing.KeyPressed(up arrow)) Or Sensing.KeyPressed(w)) Or ((Sensing.MouseX() > 160) And Sensing.MouseDown()))))
+        If (Not ((((Sensing.KeyPressed(space) Or Sensing.KeyPressed(up arrow)) Or ) Or ((Sensing.MouseX() > 160) And Sensing.MouseDown()))))
         {
             Force += (-0.1 * (Force > 1.1));
-        }
-    }
-}
-
-WhenBroadcastReceived(START)
-{
-    Forever
-    {
-        Sound.SetEffectTo(PITCH, (222 / Force));
-        If (Force > 1.5)
-        {
-            Sound.Play(Bark);
         }
     }
 }

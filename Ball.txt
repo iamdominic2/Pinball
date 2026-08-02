@@ -5,8 +5,8 @@ dir start = -210
 dot product = 8
 REFLECT = 0
 touching = 0
-xv = 0
-yv = -0.33
+xv = 1282.8
+yv = -191.13
 zone = 0
 
 
@@ -38,21 +38,15 @@ Control.WhenIStartAsClone()
     Looks.SetSizeTo(60);
     Looks.Show();
     Motion.GoTo( Tank);
+    Motion.ChangeYBy(10);
     Looks.SetEffectTo(GHOST, 100);
     Motion.PointInDirection(0);
     xv = Operator.Random(-0.5 , 0.5);
-    Wait Until (Force > 1.6);
-    Sound.SetVolumeTo(77);
-    Sound.Play(Drum Boing);
-    Repeat (13)
-    {
-        yv = (Force * 2.8);
-        Motion.ChangeYBy((Force * 1.7));
-    }
-    Motion.Move(16);
-    REFLECT = 0;
+    muteb = 0;
+    bounceoffset = 0;
     Forever
     {
+        muteb += 1;
         Motion.ChangeYBy((-1 * REFLECT));
         Looks.SetEffectTo(GHOST, 100);
         Costume.GoToFrontBack(front);
@@ -76,12 +70,17 @@ Control.WhenIStartAsClone()
             Control.Wait(0);
         }
         Looks.SetSizeTo(60);
+        bounceoffset += 1;
         If Sensing.TouchingObject(bounce1)
         {
             yv = (yv / 2);
             yv += (Force / 0.6);
-            Sound.SetVolumeTo(((Force - 1.6) * 55));
-            Sound.Play(Drum Boing);
+            Sound.SetVolumeTo(66);
+            If ((yv > 1) And (Motion.YPosition() > -111))
+            {
+                bounceoffset = 0;
+                Sound.Play(Drum Boing);
+            }
         }
         If Sensing.TouchingObject(left)
         {
@@ -123,6 +122,48 @@ Control.WhenIStartAsClone()
     {
         xxx = Motion.XPosition();
         yyy = Motion.YPosition();
+    }
+}
+
+Control.WhenIStartAsClone()
+{
+    Forever
+    {
+        If Sensing.KeyPressed(a)
+        {
+            Event.Broadcast("Boing");
+            NudgeX = 10;
+            xv += -0.4;
+            Wait Until (Not (Sensing.KeyPressed(a)));
+        }
+    }
+}
+
+Control.WhenIStartAsClone()
+{
+    Forever
+    {
+        If Sensing.KeyPressed(d)
+        {
+            Event.Broadcast("Boing");
+            NudgeX = -10;
+            xv += 0.4;
+            Wait Until (Not (Sensing.KeyPressed(d)));
+        }
+    }
+}
+
+Control.WhenIStartAsClone()
+{
+    Forever
+    {
+        If Sensing.KeyPressed(s)
+        {
+            Event.Broadcast("Boing");
+            NudgeY = 10;
+            yv += -0.4;
+            Wait Until (Not (Sensing.KeyPressed(s)));
+        }
     }
 }
 
@@ -260,16 +301,14 @@ Define Tick (warp=true)
         }
         Call Find normal;
         Looks.SwitchCostumeTo(Ball);
-        Sound.SetVolumeTo(((abs(dot product) * 22) - 45));
-        Sound.Play(pop);
+        If (muteb > 11)
+        {
+            Sound.SetVolumeTo(((abs(dot product) * 22) - 45));
+            Sound.Play(pop);
+        }
     }
     yv += -0.26;
 }
-
-
-//----- Orphaned blocks -----------------------------------------------------------------------------------------------
-
-(Force * 111);
 
 
 //----- Costumes ------------------------------------------------------------------------------------------------------

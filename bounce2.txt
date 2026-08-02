@@ -6,7 +6,9 @@ WhenBroadcastReceived(START)
     Forever
     {
         Motion.SetY(0);
+        Motion.SetX(206);
         Call c;
+        Motion.ChangeXBy(Sensing.Of(x position, LevelDisp));
     }
 }
 
@@ -25,8 +27,3 @@ Define c (warp=true)
 //----- Costumes ------------------------------------------------------------------------------------------------------
 
 costume1.svg
-
-
-//----- Sounds --------------------------------------------------------------------------------------------------------
-
-Bark.wav

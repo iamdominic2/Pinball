@@ -1,6 +1,6 @@
 # Pinball
 
-**Link:https://iamdominic2.github.io/Pinball/**
+**Link: https://iamdominic2.github.io/Pinball/**
 
 Left/A move left paddle
 

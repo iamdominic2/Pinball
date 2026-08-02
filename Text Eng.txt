@@ -184,24 +184,3 @@ z.svg
 `.png
 ~.svg
 二.svg
-
-
-//----- Sounds --------------------------------------------------------------------------------------------------------
-
-charge.wav
-Chomp.wav
-Confusion.wav
-Equip.wav
-Explosion.wav
-Fire.wav
-Lightning.wav
-pop.wav
-Punch1.wav
-PunchKill2.wav
-Read.wav
-Slow.wav
-Snoring.wav
-Snort.wav
-Swish Effect2.wav
-Teleport2.wav
-Unequip.wav
