@@ -2,6 +2,7 @@
 
 WhenBroadcastReceived(START)
 {
+    Costume.GoToFrontBack(back);
     Looks.SetSizeTo(55);
     Forever
     {

@@ -2,10 +2,12 @@
 
 WhenBroadcastReceived(START)
 {
+    Costume.GoToFrontBack(back);
     Motion.GoToXY(25, -138);
     Looks.SetSizeTo(55);
     Forever
     {
+        Costume.GoToFrontBack(back);
         Motion.GoToXY((Sensing.Of(x position, LevelDisp) + 25), (Sensing.Of(y position, LevelDisp) - 138));
         tr = 0;
         If (( Or Sensing.KeyPressed(right arrow)) Or ((Sensing.MouseDown() And (Sensing.MouseX() > 25)) And (Sensing.MouseX() < 160)))

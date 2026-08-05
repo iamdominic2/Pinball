@@ -41,7 +41,8 @@ Control.WhenIStartAsClone()
     Motion.ChangeYBy(10);
     Looks.SetEffectTo(GHOST, 100);
     Motion.PointInDirection(0);
-    xv = Operator.Random(-0.5 , 0.5);
+    xv = 0;
+    yv = 0;
     muteb = 0;
     bounceoffset = 0;
     Forever
@@ -133,7 +134,7 @@ Control.WhenIStartAsClone()
         {
             Event.Broadcast("Boing");
             NudgeX = 10;
-            xv += -0.4;
+            xv += -0.2;
             Wait Until (Not (Sensing.KeyPressed(a)));
         }
     }
@@ -147,7 +148,7 @@ Control.WhenIStartAsClone()
         {
             Event.Broadcast("Boing");
             NudgeX = -10;
-            xv += 0.4;
+            xv += 0.2;
             Wait Until (Not (Sensing.KeyPressed(d)));
         }
     }
@@ -161,7 +162,7 @@ Control.WhenIStartAsClone()
         {
             Event.Broadcast("Boing");
             NudgeY = 10;
-            yv += -0.4;
+            yv += -0.2;
             Wait Until (Not (Sensing.KeyPressed(s)));
         }
     }
@@ -276,35 +277,39 @@ Define Tick (warp=true)
 {
     xv = (xv / 1.02);
     yv = (yv / 1.01);
-    Motion.ChangeXBy(xv);
-    Motion.ChangeYBy(yv);
-    If Sensing.TouchingColour(#ff0000)
+    Repeat (9)
     {
-        Looks.SetEffectTo(GHOST, 100);
-        Sound.SetVolumeTo(100);
-        Sound.Play(Police Siren);
-        Event.Broadcast("NEW BALL");
-        Control.DeleteThisClone();
-    }
-    If (Sensing.TouchingObject(Level) Or Sensing.TouchingObject(Ball))
-    {
-        touching = 1;
-        Repeat Until (Not ((Sensing.TouchingObject(Level) Or Sensing.TouchingObject(Ball))))
+        Motion.ChangeXBy((xv / 9));
+        Motion.ChangeYBy((yv / 9));
+        If Sensing.TouchingColour(#ff0000)
         {
-            Motion.ChangeXBy((-0.06 * xv));
-            Motion.ChangeYBy((-0.06 * yv));
-            If Sensing.TouchingColour(#170303)
-            {
-                Motion.GoTo(bounce2);
-                Stop(this script);
-            }
+            Looks.SetEffectTo(GHOST, 100);
+            Sound.SetVolumeTo(100);
+            Sound.Play(Police Siren);
+            Event.Broadcast("NEW BALL");
+            Control.DeleteThisClone();
         }
-        Call Find normal;
-        Looks.SwitchCostumeTo(Ball);
-        If (muteb > 11)
+        If (Sensing.TouchingObject(Level) Or Sensing.TouchingObject(Ball))
         {
-            Sound.SetVolumeTo(((abs(dot product) * 22) - 45));
-            Sound.Play(pop);
+            touching = 1;
+            Repeat Until (Not ((Sensing.TouchingObject(Level) Or Sensing.TouchingObject(Ball))))
+            {
+                Motion.ChangeXBy((-0.06 * xv));
+                Motion.ChangeYBy((-0.06 * yv));
+                If Sensing.TouchingColour(#170303)
+                {
+                    Motion.GoTo(bounce2);
+                    Stop(this script);
+                }
+            }
+            Call Find normal;
+            Looks.SwitchCostumeTo(Ball);
+            If (muteb > 11)
+            {
+                Sound.SetVolumeTo(((abs(dot product) * 22) - 45));
+                Sound.Play(pop);
+            }
+            Stop(this script);
         }
     }
     yv += -0.26;

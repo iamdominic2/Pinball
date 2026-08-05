@@ -8,4 +8,6 @@ Right arrow moves the right paddle
 
 Space/Up to shoot spring.
 
-Use A/S/D to push the pinball table itself (as much as you want)!
+Update: Use A/S/D to push the pinball table itself (as much as you want)!
+
+Update 1.1: Halved nudging amounts in response to spammers (the smart kind) and improved collision detection
