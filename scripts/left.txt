@@ -6,7 +6,7 @@ WhenBroadcastReceived(START)
     Looks.SetSizeTo(55);
     Forever
     {
-        Motion.GoToXY((Sensing.Of(x position, LevelDisp) - 56), (Sensing.Of(y position, LevelDisp) - 138));
+        Motion.GoToXY((Sensing.Of(x position, LevelDisp) - 61), (Sensing.Of(y position, LevelDisp) - 138));
         tl = 0;
         If (( Or Sensing.KeyPressed(left arrow)) Or (Sensing.MouseDown() And (Sensing.MouseX() < -25)))
         {
