@@ -13,3 +13,5 @@ Update: Use A/S/D to push the pinball table itself (as much as you want)!
 Update 1.1: Halved nudging amounts in response to spammers (the smart kind) and improved collision detection
 
 Update 1.2: Made gap between Flippers bigger
+
+Update 1.3: Fixed wrong boolean resulting in wrong powerup location bug
