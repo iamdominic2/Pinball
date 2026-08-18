@@ -1,7 +1,7 @@
 # Pinball
 
 **Link: https://iamdominic2.github.io/Pinball/**
-
+<img width="1226" height="941" alt="Image of Pinball" src="https://github.com/user-attachments/assets/be63ff4c-923d-4836-8e7c-bf1c066cb660" />
 One of the simpler games I made, but it still involves some (*virtual*) physics.
 
 ## Basics
