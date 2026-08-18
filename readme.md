@@ -28,6 +28,4 @@ Heart: +1 life<BR>
 Enlarge: Increases the size of the coins and powerups for a while!
 
 #### Updates
-Update 1.1: Halved nudging amounts in response to spammers (the smart kind) and improved collision detection<BR>
-Update 1.2: Made the gap between Flippers bigger - personally, it was a bit too easy just by spamming the paddles to keep the ball in check. <BR>
-Update 1.3: Fixed a stray boolean NOT resulting in a wrong powerup location bug - sometimes even in the walls! This clearly caused a lot of frustration, so I'm glad it's fixed now.
+After some play-testing, I made the gap between Flippers bigger - personally, it was a bit too easy just by spamming the paddles to keep the ball in check. Additionally, to prevent abse Halved nudging amounts in response to spammers (the smart kind)! The difficulty should be just right now - still, feel free to E-mail me if you find it too difficult at naturalharmoniax@gmail.com .
