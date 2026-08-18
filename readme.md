@@ -22,10 +22,13 @@ Collect yellow coins for 10 points, and blue coins for 50 points!
 
 ## Powerups
 
-x2: Double the points you get for a while!<BR>
-Shield: Stop the ball from falling into the "edge tunnels" for a while!<BR>
-Heart: +1 life<BR>
-Enlarge: Increases the size of the coins and powerups for a while!
+x2: Double the points you get for a while!
+
+Shield: Stop the ball from falling into the "edge tunnels" for a while!
+
+Heart: +1 life
+
+Enlarge: Increases the size of the coins and power-ups for a while!
 
 #### Updates
-After some play-testing, I made the gap between Flippers bigger - personally, it was a bit too easy just by spamming the paddles to keep the ball in check. Additionally, to prevent abse Halved nudging amounts in response to spammers (the smart kind)! The difficulty should be just right now - still, feel free to E-mail me if you find it too difficult at naturalharmoniax@gmail.com .
+After some play-testing, I made the gap between Flippers bigger - personally, it was a bit too easy just by spamming the paddles to keep the ball in check. Additionally, to prevent abuse, I also halved nudging amounts in response to spammers (the smart kind)! The difficulty should be re-balanced now.
