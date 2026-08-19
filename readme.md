@@ -1,6 +1,7 @@
 # Pinball
 
-**Play in your browser! https://iamdominic2.github.io/Pinball/**
+#### **Play in your browser! https://iamdominic2.github.io/Pinball/**
+Scratch link: https://scratch.mit.edu/projects/678015046/
 
 <img width="1226" height="941" alt="Image of Pinball" src="https://github.com/user-attachments/assets/be63ff4c-923d-4836-8e7c-bf1c066cb660" />
 A pinball machine simulator built in Scratch and compiled to lightweight HTML! One of the simpler games I made, but it still involves some (*virtual*) physics.
