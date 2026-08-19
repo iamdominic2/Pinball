@@ -1,8 +1,9 @@
 # Pinball
 
-**Link: https://iamdominic2.github.io/Pinball/** <BR>
+**Play in your browser! https://iamdominic2.github.io/Pinball/**
+
 <img width="1226" height="941" alt="Image of Pinball" src="https://github.com/user-attachments/assets/be63ff4c-923d-4836-8e7c-bf1c066cb660" />
-One of the simpler games I made, but it still involves some (*virtual*) physics.
+A pinball machine simulator built in Scratch and compiled to lightweight HTML! One of the simpler games I made, but it still involves some (*virtual*) physics.
 
 ## Basics
 
@@ -16,19 +17,19 @@ Space/Up to shoot the spring.
 
 Update: Use A/S/D to push the pinball table itself (as much as you want) - only here can you do this without **TILT**ing!
 
-## Scoring
+## Scoring Engine
 
-Collect yellow coins for 10 points, and blue coins for 50 points!
+Collect yellow coins for 10 points, and blue coins for 50 points! This can be comboed with the **x2** powerup below!
 
-## Powerups
+## Power-Ups
 
-x2: Double the points you get for a while!
+x2️⃣ (Double points): Double the points you get for a while!
 
-Shield: Stop the ball from falling into the "edge tunnels" for a while!
+🛡 (Shield): Stop the ball from falling into the "edge tunnels" for a while!
 
-Heart: +1 life
+⛶ (Enlarge): Increases the size of the coins and power-ups for a while!
 
-Enlarge: Increases the size of the coins and power-ups for a while!
+♥ (Heart): +1 life
 
 #### Updates
 After some play-testing, I made the gap between Flippers bigger - personally, it was a bit too easy just by spamming the paddles to keep the ball in check. Additionally, to prevent abuse, I also halved nudging amounts in response to spammers (the smart kind)! The difficulty should be re-balanced now.
